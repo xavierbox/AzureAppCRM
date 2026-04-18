@@ -1,0 +1,19 @@
+# --- Core web app ---
+black
+ruff 
+
+flask==3.0.3
+
+# --- Azure identity (managed identity, RBAC) ---
+azure-identity==1.16.1
+
+# --- Azure Storage (Blob + Queue) ---
+azure-storage-blob==12.19.1
+azure-storage-queue==12.9.0
+
+# --- Azure App Configuration ---
+azure-appconfiguration==1.6.0
+
+# --- Utilities ---
+python-dotenv==1.0.1
+requests==2.32.3
