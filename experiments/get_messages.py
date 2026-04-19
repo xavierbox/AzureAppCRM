@@ -2,7 +2,13 @@ import os, json
 
 from azure.identity import DefaultAzureCredential
 from azure.storage.queue import QueueClient
-
+from azure.storage.queue import (
+    QueueClient,
+    BinaryBase64EncodePolicy,
+    BinaryBase64DecodePolicy
+)
+import base64 
+import json
 
 def main() -> None:
     account_name = os.environ["STORAGE_ACCOUNT"]
@@ -17,6 +23,8 @@ def main() -> None:
         queue_name=queue_name,
         credential=credential,
     )
+    #queue._message_encode_policy = BinaryBase64EncodePolicy()
+    #queue._message_decode_policy = BinaryBase64DecodePolicy()
 
     # Send a message
     for n in range(5): 
@@ -27,38 +35,49 @@ def main() -> None:
             'subzone':'WATA1',
             'model':'crm_id',
             'use_faults':True,
-            'distance_filter': 500 
+            'distance_filter': 500,
+            "encoded64": True  
         }
 
 
-        msg_send = json.dumps( config )
+        raw = json.dumps( config )
+        encoded = base64.b64encode(raw.encode("utf-8")).decode("utf-8")
 
-        send_result = queue.send_message(msg_send)
-        print("Message sent.")
-        print(f"Message ID: {send_result.id}")
+        queue.send_message( encoded )
+
+        #queue.send_message(
+        #    queue._message_encode_policy.encode(
+        #        msg_send.encode("utf-8")
+        #    )
+        #)
+
+        #send_result = queue.send_message("This is a test")#msg_send)
+        #print("Message sent.")
+        #print(f"Message ID: {send_result.id}")
 
 
     # Receive one message
-    messages = queue.receive_messages(messages_per_page=1)
+    #print()
+    #messages = queue.receive_messages(messages_per_page=1)
 
-    received_any = False
-    for msg in messages:
-        received_any = True
-        print(f"Received message: {msg.content}")
+    #received_any = False
+    #for msg in messages:
+    #    received_any = True
+    #    #print(f"Received message: {msg.content}")
+    #    print("received message")
+
+    #    #config = json.loads( msg.content )
+
+    #    #print( config, type(config))
 
 
-        config = json.loads( msg.content )
+    #    # Delete after processing
+    #    queue.delete_message(msg)
+    #    print("Message deleted.")
+    #    break
 
-        print( config, type(config))
-
-
-        # Delete after processing
-        queue.delete_message(msg)
-        print("Message deleted.")
-        break
-
-    if not received_any:
-        print("No messages available.")
+    #if not received_any:
+    #    print("No messages available.")
 
 
 if __name__ == "__main__":
