@@ -1,7 +1,7 @@
 import logging
 import json 
 import azure.functions as func
-import base64 
+
 
 #https://www.youtube.com/watch?v=swrzXmyTtrk
 
@@ -25,8 +25,10 @@ def queue_trigger(msg:func.QueueMessage) -> None:
 
     config = json.loads( config_as_str )
 
-    logging.info('***Python queue trigger function processed a queue item: %s',
-    type(config))
+    logging.info('***Python object : %s',
+    config)
+    
+    print('***Python object', config)
     
     
     #x = base64.b64decode(raw)
