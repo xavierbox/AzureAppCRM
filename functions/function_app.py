@@ -13,22 +13,15 @@ app = func.FunctionApp()
     connection="AzureWebJobsStorage"
 )
 def queue_trigger(msg:func.QueueMessage) -> None:
-    logging.info("\n\nFUNCTION ENTERED\n\n")
-    #logging.error("MESSAGE: %s", msg)
-
+    #logging.info("\n\nFUNCTION ENTERED\n\n")
     # 1. Get raw bytes from queue
-    raw = msg.get_body()   # bytes
+    #raw = msg.get_body()   # bytes
     config_as_str = msg.get_body().decode('utf-8') 
 
-    logging.info('Python queue trigger function processed a queue item: %s',
-    config_as_str)
+    #logging.info('Python queue trigger function processed a queue item: %s',config_as_str)
 
     config = json.loads( config_as_str )
-
-    logging.info('***Python object : %s',
-    config)
-    
-    print('***Python object', config)
+    #logging.info('***Python object : %s',config)
     
     
     #x = base64.b64decode(raw)
