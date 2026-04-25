@@ -4,11 +4,14 @@
 set -a 
 source .env 
 set +a 
-#RESOURCE_GROUP="rg-launcher-uksouth"
-#LOCATION="uksouth"
-#STORAGE_ACCOUNT="launcherstacc899"   # must be globally unique
+RESOURCE_GROUP="rg-launcher-uksouth"
+LOCATION="uksouth"
+STORAGE_ACCOUNT="launcherstacc899"   # must be globally unique
 #CONTAINER_NAME="data"
-#QUEUE_NAME="queue-launcher-uksouth" 
+QUEUE_NAME="queue-launcher-uksouth" 
+UPLOAD_QUEUE_NAME2="process-uploads-queue"
+
+ 
 
 
 #az group create \
@@ -42,4 +45,5 @@ set +a
 
 
 #az storage queue create --account-name "$STORAGE_ACCOUNT" --name "$QUEUE_NAME" --auth-mode login 
-
+#az storage queue create --account-name "$STORAGE_ACCOUNT" --name "$QUEUE_NAME" --auth-mode login 
+az storage queue create --account-name "$STORAGE_ACCOUNT" --name "$UPLOAD_QUEUE_NAME" --auth-mode login
