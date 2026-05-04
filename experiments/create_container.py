@@ -100,7 +100,7 @@ def start_upload_route( project_name = "project7" ):
     print(f"Time taken to create container: {end_time - start_time} seconds")
 
     start_time = time.perf_counter()
-    sas = storage.generate_container_sas_url( f, hours=0.2 )
+    sas = storage.generate_container_sas_url( f, hours=1 )
     end_time = time.perf_counter()
     print(f"Time taken to generate SAS URL: {end_time - start_time} seconds")
 

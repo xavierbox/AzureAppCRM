@@ -3,6 +3,8 @@ black
 ruff 
 
 flask==3.0.3
+fastapi==0.136.1
+pydantic==2.13.3
 
 # --- Azure identity (managed identity, RBAC) ---
 azure-identity==1.16.1
