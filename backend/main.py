@@ -134,7 +134,7 @@ async def start_upload(arg:UploadSimulatorFilesModel):
                 }
 
 
-    return {'status',500}
+    return 500
 
 
 
@@ -142,8 +142,12 @@ async def start_upload(arg:UploadSimulatorFilesModel):
 async def end_upload(arg:UploadSimulatorFilesModel):
 
     print( arg.model_dump_json(indent=3))
-    logger.info("START_UPLOAD CALLED")
+    logger.info("end upload called")
     logger.info("Payload: %s", arg.model_dump())
+
+    
+
+
     return {'ok':'we are --ending-- the upload'}
 
 
