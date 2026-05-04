@@ -5,8 +5,6 @@ ruff
 flask==3.0.3
 fastapi==0.136.1
 pydantic==2.13.3
-uvicorn==0.46.0
-
 
 # --- Azure identity (managed identity, RBAC) ---
 azure-identity==1.16.1
